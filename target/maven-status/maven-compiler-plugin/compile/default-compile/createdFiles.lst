@@ -1,8 +1,12 @@
+kr/ac/hansung/cse/model/CategoryRequest.class
 kr/ac/hansung/cse/model/Category.class
+kr/ac/hansung/cse/service/CategoryService.class
 kr/ac/hansung/cse/model/ProductForm.class
 kr/ac/hansung/cse/exception/GlobalExceptionHandler.class
+kr/ac/hansung/cse/exception/CategoryAlreadyExistsException.class
 kr/ac/hansung/cse/model/Tag.class
 kr/ac/hansung/cse/exception/ProductNotFoundException.class
 kr/ac/hansung/cse/model/ProductDetail.class
+kr/ac/hansung/cse/controller/CategoryController.class
 kr/ac/hansung/cse/repository/TagRepository.class
 kr/ac/hansung/cse/repository/CategoryRepository.class
