@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>카테고리 목록</title>
+    <style>
+        body { font-family: 'Malgun Gothic', Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
+        h1 { border-bottom: 2px solid #3498db; padding-bottom: 10px; color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { background: #3498db; color: white; padding: 12px; text-align: left; }
+        td { padding: 10px 12px; border-bottom: 1px solid #dee2e6; }
+        .btn { display: inline-block; padding: 8px 16px; border-radius: 4px; text-decoration: none; }
+        .btn-primary { background: #3498db; color: white; }
+        .btn-danger { background: #e74c3c; color: white; border: none; cursor: pointer; padding: 6px 12px; border-radius: 4px; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+<h1>카테고리 목록</h1>
+
+<p class="success" th:if="${successMessage}" th:text="${successMessage}"></p>
+<p class="error" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+
+<a class="btn btn-primary" href="/categories/create">+ 새 카테고리 등록</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>카테고리명</th>
+        <th>작업</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cat : ${categories}">
+        <td th:text="${cat.id}"></td>
+        <td th:text="${cat.name}"></td>
+        <td>
+            <form th:action="@{/categories/{id}/delete(id=${cat.id})}" method="post">
+                <button type="submit" class="btn-danger">삭제</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<p th:text="${'실습 수행 일시: ' + #temporals.format(#temporals.createNow(), 'yyyy-MM-dd HH:mm:ss') + ' | 학번: 2171381 | 성명: 지경태'}"></p>
+</body>
+</html>

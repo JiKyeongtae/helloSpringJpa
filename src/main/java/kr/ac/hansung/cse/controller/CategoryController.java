@@ -1,8 +1,8 @@
 package kr.ac.hansung.cse.controller;
 
 import jakarta.validation.Valid;
-import kr.ac.hansung.cse.exception.DuplicateCategoryException;
-import kr.ac.hansung.cse.model.CategoryForm;
+import kr.ac.hansung.cse.exception.CategoryAlreadyExistsException;
+import kr.ac.hansung.cse.model.CategoryRequest;
 import kr.ac.hansung.cse.service.CategoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,20 +28,20 @@ public class CategoryController {
 
     @GetMapping("/create")
     public String showCreateForm(Model model) {
-        model.addAttribute("categoryForm", new CategoryForm());
+        model.addAttribute("categoryForm", new CategoryRequest());
         return "categoryForm";
     }
 
     @PostMapping("/create")
     public String createCategory(
-            @Valid @ModelAttribute CategoryForm categoryForm,
+            @Valid @ModelAttribute CategoryRequest categoryForm,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) return "categoryForm";
         try {
             categoryService.createCategory(categoryForm.getName());
             redirectAttributes.addFlashAttribute("successMessage", "등록 완료");
-        } catch (DuplicateCategoryException e) {
+        } catch (CategoryAlreadyExistsException e) {
             bindingResult.rejectValue("name", "duplicate", e.getMessage());
             return "categoryForm";
         }
